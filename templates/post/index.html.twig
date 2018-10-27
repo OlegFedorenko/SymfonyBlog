@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello!{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+    <div class="example-wrapper">
+
+        <h3>Welcome</h3>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+        {{ form_start(form, {'attr': {'novalidate':'novalidate'}}) }}
+
+            {{ form_widget(form) }}
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Post</button>
+        </div>
+        {{ form_end(form) }}
+        <a href="{{ path('homepage') }}">Main page</a>
+    </div>
+{% endblock %}

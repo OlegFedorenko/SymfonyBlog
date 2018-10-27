@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Symfony Blog{% endblock %}
+
+{% block body %}
+
+<h5>{{ post.postHead }}</h5>
+<p>{{ post.postedAt|date("d.m.Y h:m:s A") }}</p>
+<p>{{ post.postBody }}</p>
+<a href="">Edit</a> <br>
+<a href="{{ path('homepage') }}">Main page</a>
+
+
+{% endblock %}
+
+
+
