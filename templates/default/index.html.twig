@@ -4,14 +4,21 @@
 
 {% block body %}
     <hr>
-    {% for post in posts %}
-        <h5>{{ post.postHead }}</h5>
-        <p>{{ post.postedAt|date("d.m.Y h:m:s A") }}</p>
-        <p>{{ post.postBody }}</p>
-        <a href="{{ path('post_show', {'id': post.id}) }}">Reed more</a>
-        <hr>
-    {% endfor %}
+        {% for post in posts|reverse|slice(0,3) %}
+            <h5>{{ post.postHead }}</h5>
+            <p>{{ post.postedAt|date("d.m.Y h:i:s A") }}</p>
+            <p>{{ post.shortBodyCheat }}
 
+            {% if post.linkMore %}
+            <a href="{{ path('post_show', {'id': post.id}) }}">Read more</a>
+            <hr>
+            {% endif %}
+
+            </p>
+        {% endfor %}
+
+    <a href="{{ path('show_all') }}">View all posts</a>
+    <hr>
 <div class="example-wrapper">
 
 </div>

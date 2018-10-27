@@ -13,9 +13,18 @@ class DefaultController extends AbstractController
      */
     public function index(Posts $posts)
     {
-
-
         return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+            'posts' => $posts->getAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/all", name="show_all")
+     */
+    public function all(Posts $posts)
+    {
+        return $this->render('post/showAll.html.twig', [
             'controller_name' => 'DefaultController',
             'posts' => $posts->getAll(),
         ]);

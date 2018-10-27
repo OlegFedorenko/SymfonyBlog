@@ -40,6 +40,7 @@ class Post
     public function __construct()
     {
         $this->postedAt = new \DateTime();
+        $this->noLink = false;
     }
 
 
@@ -82,5 +83,44 @@ class Post
         $this->postBody = $postBody;
 
         return $this;
+    }
+
+    public function getShortBodyCheat(): ?string
+    {
+        if (mb_strlen($this->postBody) <= 355)
+        {
+            return $this->postBody;
+        }
+
+        $short = mb_substr($this->postBody, 0, 355);
+        $spacePosition = mb_strrpos($short, ' ');
+
+        if ($spacePosition === false)
+        {
+            return $short.'...';
+        }
+
+        $short = mb_substr($short, 0, $spacePosition);
+
+        return $short.'...';
+    }
+
+    public function getShortBody():? string
+    {
+        $aPosition = mb_strrpos($this->postBody, '\n');
+        return $short = mb_substr($this->postBody, 0, $aPosition);
+
+    }
+
+    public function linkMore(): bool
+    {
+        if (mb_strlen($this->postBody) <= 355)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

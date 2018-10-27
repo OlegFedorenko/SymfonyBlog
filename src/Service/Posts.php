@@ -40,4 +40,8 @@ class Posts
         return $this->repo->find($id);
     }
 
+//    public function getLast()
+//    {
+//        return $this->repo->findBy();
+//    }
 }

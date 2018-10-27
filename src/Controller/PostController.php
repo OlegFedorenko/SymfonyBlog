@@ -31,7 +31,7 @@ class PostController extends AbstractController
 
             $this->addFlash('success', 'Success!');
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('post_show',['id' => $post->getId()]);
         }
 
         return $this->render('post/index.html.twig', [

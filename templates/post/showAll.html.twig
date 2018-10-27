@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Symfony Blog{% endblock %}
+
+{% block body %}
+    <hr>
+    <h3>History</h3>
+    <hr>
+    {% for post in posts|reverse %}
+        <h5>{{ post.postHead }}</h5>
+        <p>{{ post.postedAt|date("d.m.Y h:i:s A") }}</p>
+        <p>{{ post.shortBodyCheat }}
+
+        {% if post.linkMore %}
+            <a href="{{ path('post_show', {'id': post.id}) }}">Read more</a>
+            <hr>
+        {% endif %}
+
+        </p>
+    {% endfor %}
+
+    <div class="example-wrapper">
+
+    </div>
+
+{% endblock %}
