@@ -4,6 +4,8 @@
 
 {% block body %}
     <hr>
+    <a href="{{ path('homepage') }}"><< Main page</a>
+    <hr>
     <h3>History</h3>
     <hr>
     {% for post in posts|reverse %}

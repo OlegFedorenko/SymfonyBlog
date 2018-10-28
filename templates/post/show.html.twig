@@ -3,13 +3,13 @@
 {% block title %}Symfony Blog{% endblock %}
 
 {% block body %}
-
-<h5>{{ post.postHead }}</h5>
-<p>{{ post.postedAt|date("d.m.Y h:m:s A") }}</p>
-<p>{{ post.postBody }}</p>
-<a href="">Edit</a> <br>
-<a href="{{ path('homepage') }}">Main page</a>
-
+    <hr>
+    <a href="{{ path('homepage') }}"><< Main page</a>
+    <hr>
+    <h5>{{ post.postHead }}</h5>
+    <p>{{ post.postedAt|date("d.m.Y h:m:s A") }}</p>
+    <p>{{ post.postBody }}</p>
+    <a href="{{ path('post_edit', {'id': post.id}) }}">Edit</a>
 
 {% endblock %}
 

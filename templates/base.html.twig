@@ -9,7 +9,14 @@
 
         <title>{% block title %}Welcome!{% endblock %}</title>
 
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <style type="text/css">
+                body {
+                    background-color: #e9ffb5;
+                    background-image: url(http://www.topglobus.ru/fotoalbum/pozadi/galerie/568.jpg);
+                }
+            </style>
+        {% endblock %}
 
     </head>
 

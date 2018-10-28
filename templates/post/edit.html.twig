@@ -6,12 +6,10 @@
 
 {% block body %}
     <div class="example-wrapper">
-
         <hr>
         <a href="{{ path('homepage') }}"><< Main page</a>
         <hr>
-
-        <h3>Create new post</h3>
+        <h3>Edit post {{ post.postedAt|date("d.m.Y h:m:s A") }}</h3>
 
         {% for message in app.flashes('success') %}
             <div class="alert alert-success">{{ message }}</div>
@@ -24,7 +22,7 @@
         {{ form_row(form.postBody,{ 'label': 'Text' }) }}
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Post</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
         {{ form_end(form) }}
     </div>

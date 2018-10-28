@@ -49,8 +49,32 @@ class PostController extends AbstractController
         return $this->render('post/show.html.twig',['post'=> $post]);
     }
 
-    public function edit()
+    /**
+     * @Route("/post/{id}/edit", name="post_edit", requirements={"id" = "\d+"})
+     * @ParamConverter("post", options={"mapping"={"id"="id"}})
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function edit(Request $request, Posts $posts, Post $post,
+                         EntityManagerInterface $entityManager)
     {
+        $postForEdit = $posts->getById($post->getId());
 
+        $form = $this->createForm(PostType::class,$postForEdit);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) // Валидируем и записываем в базу данных
+        {
+            $entityManager->persist($postForEdit);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Success!');
+
+            return $this->redirectToRoute('post_show',['id' => $postForEdit->getId()]);
+        }
+
+        return $this->render('post/edit.html.twig', [
+            'form' => $form->createView(),
+            'post' => $post,
+        ]);
     }
 }
