@@ -3,12 +3,20 @@
 {% block title %}Symfony Blog{% endblock %}
 
 {% block body %}
+
+
+
     <hr>
     <a href="{{ path('homepage') }}"><< Main page</a>
     <hr>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+        <hr>
+    {% endfor %}
     <h5>{{ post.postHead }}</h5>
     <p>{{ post.postedAt|date("d.m.Y h:m:s A") }}</p>
-    <p>{{ post.postBody }}</p>
+    <p>{{ post.postBody|nl2br }}</p>
+    <hr>
     <a href="{{ path('post_edit', {'id': post.id}) }}">Edit</a>
 
 {% endblock %}

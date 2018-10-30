@@ -5,15 +5,14 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
+
+
+
     <div class="example-wrapper">
         <hr>
         <a href="{{ path('homepage') }}"><< Main page</a>
         <hr>
         <h3>Edit post {{ post.postedAt|date("d.m.Y h:m:s A") }}</h3>
-
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success">{{ message }}</div>
-        {% endfor %}
 
         {{ form_start(form, {'attr': {'novalidate':'novalidate'}}) }}
 

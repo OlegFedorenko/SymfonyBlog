@@ -87,12 +87,12 @@ class Post
 
     public function getShortBodyCheat(): ?string
     {
-        if (mb_strlen($this->postBody) <= 355)
+        if (mb_strlen($this->postBody) <= 255)
         {
             return $this->postBody;
         }
 
-        $short = mb_substr($this->postBody, 0, 355);
+        $short = mb_substr($this->postBody, 0, 255);
         $spacePosition = mb_strrpos($short, ' ');
 
         if ($spacePosition === false)
@@ -107,20 +107,8 @@ class Post
 
     public function getShortBody():? string
     {
-        $aPosition = mb_strrpos($this->postBody, '\n');
+        $aPosition = mb_strpos($this->postBody, "\n");
         return $short = mb_substr($this->postBody, 0, $aPosition);
 
-    }
-
-    public function linkMore(): bool
-    {
-        if (mb_strlen($this->postBody) <= 355)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
     }
 }

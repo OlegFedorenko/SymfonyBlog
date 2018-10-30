@@ -32,6 +32,11 @@ class Posts
         return $this->repo->findAll();
     }
 
+    public function getLastThree()
+    {
+        return $this->repo->findBy([],['postedAt' => 'DESC'], 3);
+    }
+
     /**
      * @return Post
      */

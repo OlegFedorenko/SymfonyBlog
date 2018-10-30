@@ -7,16 +7,11 @@
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
               crossorigin="anonymous">
 
+        <link rel="stylesheet" href="{{ asset('styles/style.css') }}">
+
         <title>{% block title %}Welcome!{% endblock %}</title>
 
-        {% block stylesheets %}
-            <style type="text/css">
-                body {
-                    background-color: #e9ffb5;
-                    background-image: url(http://www.topglobus.ru/fotoalbum/pozadi/galerie/568.jpg);
-                }
-            </style>
-        {% endblock %}
+        {% block stylesheets %} {% endblock %}
 
     </head>
 

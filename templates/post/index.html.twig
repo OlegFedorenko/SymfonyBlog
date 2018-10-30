@@ -13,9 +13,7 @@
 
         <h3>Create new post</h3>
 
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success">{{ message }}</div>
-        {% endfor %}
+
 
         {{ form_start(form, {'attr': {'novalidate':'novalidate'}}) }}
 
