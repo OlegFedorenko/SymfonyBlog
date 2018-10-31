@@ -2,22 +2,43 @@
 
 {% block title %}Symfony Blog{% endblock %}
 
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 {% block body %}
-
-
 
     <hr>
     <a href="{{ path('homepage') }}"><< Main page</a>
     <hr>
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">{{ message }}</div>
-        <hr>
-    {% endfor %}
-    <h5>{{ post.postHead }}</h5>
+
+    <h5 style="font-weight: bold">{{ post.postHead }}</h5>
     <p>{{ post.postedAt|date("d.m.Y h:m:s A") }}</p>
     <p>{{ post.postBody|nl2br }}</p>
     <hr>
     <a href="{{ path('post_edit', {'id': post.id}) }}">Edit</a>
+    <hr>
+        <div class="row justify-content-end">
+         <div class="col-11">
+            {% for comment in post.comments %}
+                <h6 style="font-weight: bold">{{ comment.nickname }}</h6>
+                <p>{{ comment.commentedAt|date("d.m.Y h:m:s A") }}</p>
+                <p>{{ comment.commentBody|nl2br }}</p>
+                <hr>
+            {% endfor%}
+        </div>
+        </div>
+
+    {{ form_start(form, {'attr': {'novalidate':'novalidate'}}) }}
+
+    {{ form_row(form.nickname,{ 'label': 'Nickname' }) }}
+
+    {{ form_row(form.commentBody,{ 'label': 'Comment' }) }}
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    {{ form_end(form) }}
+
+
 
 {% endblock %}
 

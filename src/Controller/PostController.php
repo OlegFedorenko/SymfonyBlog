@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Post;
+use App\Form\CommentType;
 use App\Form\PostType;
-use App\Service\Posts;
+use App\Service\Comments;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,9 +45,29 @@ class PostController extends AbstractController
      * @ParamConverter("post", options={"mapping"={"id"="id"}})
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function show(Post $post, Posts $postsService)
+    public function show(Post $post, Comments $commentsService,
+                         Request $request, EntityManagerInterface $entityManager)
     {
-        return $this->render('post/show.html.twig',['post'=> $post]);
+        $newComment = new Comment();
+
+        $newComment->setPost($post);
+
+        $form = $this->createForm(CommentType::class, $newComment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) // Валидируем и записываем в базу данных
+        {
+            $entityManager->persist($newComment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('post_show',['id' => $post->getId()]);
+        }
+
+        return $this->render('post/show.html.twig',[
+            'post'=> $post,
+            'comments'=>$commentsService->getAll(),
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
@@ -57,7 +79,7 @@ class PostController extends AbstractController
                          EntityManagerInterface $entityManager)
     {
 
-        $form = $this->createForm(PostType::class,$post);//ForEdit);
+        $form = $this->createForm(PostType::class,$post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) // Валидируем и записываем в базу данных
